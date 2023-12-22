@@ -12,7 +12,7 @@ const employeeSchema = new Schema({
     department: { type: String },
     Address: { type: String },
     dob: { type: String },
-    salary: { type: String },
+    salary: { type: Number },
 }, { timestamps: true });
 
 export interface IEmployee extends Document {
@@ -22,11 +22,11 @@ export interface IEmployee extends Document {
     department: string,
     Address: string,
     dob: string,
-    salary: string
+    salary: number
 }
 
 
-employeeSchema.plugin(AutoIncrement, {inc_field: 'employee_id'});
+employeeSchema.plugin(AutoIncrement, { inc_field: 'employee_id' });
 export default mongoose.model<IEmployee>(
     'Employee',
     employeeSchema,

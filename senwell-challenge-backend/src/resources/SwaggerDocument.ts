@@ -57,7 +57,7 @@ const options = {
                         department: { type: "string" },
                         Address: { type: "string" },
                         dob: { type: "string" },
-                        salary: { type: "string" },
+                        salary: { type: "number" },
                     },
                     required: ["first_name", "dob", "Address", "salary"],
                 },
