@@ -23,7 +23,7 @@ function App() {
         <article >
           <h3 >{response?.data.title}</h3>
           <p >
-            {JSON.stringify(response?.data)}
+            <pre>{JSON.stringify(response?.data, null, 2) }</pre>
           </p>
         </article>
       )}
