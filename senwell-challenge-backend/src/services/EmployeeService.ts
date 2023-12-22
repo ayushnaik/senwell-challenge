@@ -90,23 +90,12 @@ class EmployeeService {
         let traceId = getNamespace(process.env.CLS_NAMESPACE).get("traceId");
 
         try {
-            const employee: any = await Employee.findOne({ department: employeeDepartment });
-
-            if (!employee) {
-                return new ResponseStructure(
-                    false,
-                    409,
-                    'This Employee does not Exist.',
-                    {},
-                    {},
-                    traceId
-                );
-            }
+            const employee: any = await Employee.find({ department: employeeDepartment });
 
             return new ResponseStructure(
                 true,
                 200,
-                'Employee Record Retrieved Successfully.',
+                'Employee Records Retrieved Successfully.',
                 employee,
                 {},
                 traceId
