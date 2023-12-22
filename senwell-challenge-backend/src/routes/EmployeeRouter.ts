@@ -73,6 +73,33 @@ EmployeeRouter.get('/getAllEmployees', EmployeeController.getAllEmployees);
 
 /**
  * @openapi
+ * /employee/getSortedEmployees:
+ *   get:
+ *     tags:
+ *       - Employee
+ *     summary: Get All Employees.
+ *     description: API used to Get All Employees...
+ *     parameters:
+ *       - in: query
+ *         name: OrderBy
+ *         schema:
+ *           type: string
+ *           enum:
+ *             - salary
+ *       - in: query
+ *         name: Ordering
+ *         schema:
+ *           $ref: '#/components/schemas/Ordering'
+ *     responses:
+ *       200:
+ *         description: All Employees Retrieved Successfully.
+ *       409:
+ *         description: No Employees Exist in the Database.
+ */
+EmployeeRouter.get('/getSortedEmployees', EmployeeController.getSortedEmployees);
+
+/**
+ * @openapi
  * /employee/getEmployeeById/{employeeId}:
  *   get:
  *     tags:

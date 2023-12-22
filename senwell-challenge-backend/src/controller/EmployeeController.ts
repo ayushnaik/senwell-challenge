@@ -101,6 +101,25 @@ class EmployeeController {
         }
     };
 
+    /* The `getSortedEmployees` method in the `EmployeeController` class is an asynchronous function
+    that handles the retrieval of all employees sorted by a specific order. */
+    public getSortedEmployees = async (
+        req: any,
+        res: any,
+        next: any,
+    ) => {
+        logger.info('Inside getSortedEmployees in EmployeeController');
+        try {
+            const response: ResponseStructure = await EmployeeService.getSortedEmployees(
+                req.query.OrderBy,
+                req.query.Ordering,
+            );
+            res.status(response.status).send(response);
+        } catch (error) {
+            next(error);
+        }
+    };
+
     /* The `deleteEmployee` method in the `EmployeeController` class is an asynchronous function that handles the
     deletion of a employee. It takes three parameters: `req`, `res`, and `next`, which represent the
     request, response, and next middleware function respectively. */

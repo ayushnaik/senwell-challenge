@@ -11,7 +11,7 @@ function App() {
   });
 
   return (
-    <div>
+    <div className='backgroundImage'>
       <h1>Senwell Challenge.</h1>
       {loading && (
         <p>Loading...</p>

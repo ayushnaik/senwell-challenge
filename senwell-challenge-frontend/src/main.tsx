@@ -5,9 +5,9 @@ import App from './App.tsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <NextUIProvider>
-    <React.StrictMode>
+  <React.StrictMode>
+    <NextUIProvider>
       <App />
-    </React.StrictMode>
-  </NextUIProvider>
+    </NextUIProvider>
+  </React.StrictMode>,
 )

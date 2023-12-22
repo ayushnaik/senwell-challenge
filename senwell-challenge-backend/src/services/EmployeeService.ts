@@ -256,6 +256,56 @@ class EmployeeService {
         }
     };
 
+    /* The above code is a TypeScript function that retrieves and sorts employee documents from a
+    database. */
+    public getSortedEmployees = async (
+        OrderBy: string,
+        Ordering: string,
+    ) => {
+        logger.info('Inside getSortedEmployees in EmployeeService');
+
+        let traceId = getNamespace(process.env.CLS_NAMESPACE).get("traceId");
+
+        try {
+
+            const order: any = {};
+            if (OrderBy && Ordering) {
+                if (OrderBy == 'salary') order.salary = Ordering == 'ASC' ? 1 : -1;
+            } else order.createdAt = 1;
+
+            const pagination = {
+                $facet: {
+                    page: [
+                        { $sort: order },
+                    ],
+                    total: [{ $count: 'totalItems' }],
+                },
+            };
+            let employees: any = await Employee.aggregate([
+                pagination,
+            ]);
+
+            employees = {
+                page: employees[0].page,
+                totalItems: employees[0].total[0] ? employees[0].total[0].totalItems : 0,
+            };
+
+            return new ResponseStructure(
+                true,
+                200,
+                'All Employees Documents Retrieved Successfully.',
+                employees,
+                {},
+                traceId
+            );
+        } catch (error: any) {
+            logger.error(
+                `name- ${error.name}, message - ${error.message}, stack trace - ${error.stack}`,
+            );
+            throw error;
+        }
+    };
+
     /* The `deleteEmployee` method is a public method of the `EmployeeService` class. It is an asynchronous
     function that takes an argument `employeeId` of type `string`. */
     public deleteEmployee = async (employeeId: string) => {
